@@ -1,12 +1,16 @@
 import Link from "next/link";
 
+type QueryValue = string | string[] | undefined;
+
+type WarningSearchParams = {
+  url?: QueryValue;
+  score?: QueryValue;
+  label?: QueryValue;
+  reason?: QueryValue;
+};
+
 type WarningPageProps = {
-  searchParams: {
-    url?: string;
-    score?: string;
-    label?: string;
-    reason?: string;
-  };
+  searchParams?: Promise<WarningSearchParams>;
 };
 
 function safeExternalUrl(url: string): string {
@@ -31,11 +35,22 @@ function safeExternalUrl(url: string): string {
   }
 }
 
-export default function WarningPage({ searchParams }: WarningPageProps) {
-  const url = searchParams.url || "";
-  const score = searchParams.score || "0";
-  const label = searchParams.label || "Suspicious";
-  const reason = searchParams.reason || "Potential risk indicators were detected.";
+function firstQueryValue(value: QueryValue, fallback: string): string {
+  if (Array.isArray(value)) {
+    return value[0] ?? fallback;
+  }
+  if (typeof value === "string") {
+    return value;
+  }
+  return fallback;
+}
+
+export default async function WarningPage({ searchParams }: WarningPageProps) {
+  const params = (await searchParams) ?? {};
+  const url = firstQueryValue(params.url, "");
+  const score = firstQueryValue(params.score, "0");
+  const label = firstQueryValue(params.label, "Suspicious");
+  const reason = firstQueryValue(params.reason, "Potential risk indicators were detected.");
   const openHref = url ? safeExternalUrl(url) : "";
 
   return (
