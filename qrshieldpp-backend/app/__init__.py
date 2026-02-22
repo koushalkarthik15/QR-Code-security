@@ -1,0 +1,2 @@
+"""QRShield++ backend application package."""
+

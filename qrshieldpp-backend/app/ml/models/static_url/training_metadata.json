@@ -1,0 +1,73 @@
+{
+  "generated_at_utc": "2026-02-09T18:47:28.717304+00:00",
+  "dataset_path": "..\\qrshieldpp-dataset\\data\\raw\\url_samples.csv",
+  "resolved_url_column": "url_canonical",
+  "label_column": "label",
+  "label_mapping": {
+    "benign": 0,
+    "malicious": 1
+  },
+  "train_samples": 28,
+  "test_samples": 8,
+  "feature_count": 40,
+  "feature_names": [
+    "url_length",
+    "host_length",
+    "path_length",
+    "query_length",
+    "digit_count",
+    "digit_ratio",
+    "alpha_count",
+    "alpha_ratio",
+    "special_count",
+    "special_ratio",
+    "dot_count",
+    "hyphen_count",
+    "underscore_count",
+    "slash_count",
+    "subdomain_count",
+    "path_depth",
+    "query_param_count",
+    "has_at_symbol",
+    "has_ip_host",
+    "has_port",
+    "is_https",
+    "is_http",
+    "has_punycode",
+    "has_percent_encoding",
+    "has_double_slash_path",
+    "contains_shortener",
+    "suspicious_keyword_count",
+    "tld_length",
+    "host_token_count",
+    "entropy_url",
+    "entropy_host",
+    "entropy_path",
+    "entropy_query",
+    "unique_char_ratio",
+    "host_digit_ratio",
+    "host_alpha_ratio",
+    "max_digit_run",
+    "max_alpha_run",
+    "max_special_run",
+    "max_repeated_char_run"
+  ],
+  "metrics": {
+    "logistic_regression_baseline": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "random_forest_final": {
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    }
+  },
+  "artifacts": {
+    "baseline_model": "app\\ml\\models\\static_url\\logistic_regression_baseline.joblib",
+    "final_model": "app\\ml\\models\\static_url\\random_forest_final.joblib"
+  }
+}

@@ -1,0 +1,22 @@
+column_name,data_type,description
+sample_id,string,Unique record identifier
+qr_payload_raw,string,Raw decoded QR text
+contains_url,bool,Flag indicating URL exists
+url_raw,string,URL as extracted
+url_canonical,string,Normalized URL used for features
+scheme,category,URL scheme
+host,string,Hostname or domain
+etld_plus_one,string,Registered domain
+tld,category,Top level domain
+path,string,URL path
+query,string,Query string
+fragment_present,bool,Fragment existence flag
+port,int_or_null,Explicit port if present
+redirect_final_url,string_or_null,Final URL after redirect expansion
+redirect_hops,int,Number of redirect steps
+scan_time,datetime,Ingestion timestamp
+source,category,Data source
+label,category,benign malicious suspicious unknown
+label_confidence,float,Label confidence from zero to one
+label_method,category,manual rule feed_consensus vendor_consensus
+notes,string_or_null,Analyst notes
