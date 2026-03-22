@@ -4,7 +4,7 @@ import { timingSafeEqual } from "crypto";
 const BACKEND_BASE =
   process.env.QRSHIELD_API_BASE ||
   process.env.NEXT_PUBLIC_QRSHIELD_API_BASE ||
-  "http://127.0.0.1:8000";
+  "https://qr-code-security.vercel.app/";
 const BACKEND_API_KEY = process.env.QRSHIELD_API_KEY || "";
 const CLIENT_API_KEY =
   process.env.QRSHIELD_CLIENT_API_KEY ||
