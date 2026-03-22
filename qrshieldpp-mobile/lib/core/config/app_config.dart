@@ -2,7 +2,7 @@ class AppConfig {
   // Android emulator can reach host localhost via 10.0.2.2.
   static const String _defaultBaseUrl = String.fromEnvironment(
     'QRSHIELD_API_BASE_URL',
-    defaultValue: 'http://10.0.2.2:8000',
+    defaultValue: 'https://qr-code-security-1q2c.vercel.app',
   );
 
   static String get apiBaseUrl => _defaultBaseUrl;
