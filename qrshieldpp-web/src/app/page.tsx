@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import jsQR from "jsqr";
 import { FormEvent, useEffect, useMemo, useState } from "react";
 
 import RiskScoreDisplay from "@/components/risk-score-display";
@@ -46,23 +47,40 @@ async function detectQrTextFromFile(file: File): Promise<string | null> {
     return null;
   }
 
-  const DetectorCtor = (window as Window & { BarcodeDetector?: any }).BarcodeDetector;
-  if (!DetectorCtor) {
-    return null;
-  }
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+        if (!ctx) {
+          resolve(null);
+          return;
+        }
 
-  const detector = new DetectorCtor({ formats: ["qr_code"] });
-  const bitmap = await createImageBitmap(file);
-  try {
-    const detections = await detector.detect(bitmap);
-    const first = detections?.[0];
-    const rawValue = first?.rawValue;
-    return rawValue ? String(rawValue) : null;
-  } finally {
-    if (typeof bitmap.close === "function") {
-      bitmap.close();
-    }
-  }
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage(img, 0, 0, img.width, img.height);
+        
+        const imageData = ctx.getImageData(0, 0, img.width, img.height);
+        // jsQR analyzes the raw RGBA pixels
+        const code = jsQR(imageData.data, imageData.width, imageData.height, {
+          inversionAttempts: "dontInvert",
+        });
+
+        if (code) {
+          resolve(code.data);
+        } else {
+          resolve(null);
+        }
+      };
+      img.onerror = () => reject(new Error("Failed to load image."));
+      img.src = String(event.target?.result || "");
+    };
+    reader.onerror = () => reject(new Error("Failed to read file."));
+    reader.readAsDataURL(file);
+  });
 }
 
 export default function HomePage() {
