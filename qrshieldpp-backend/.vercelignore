@@ -1,0 +1,9 @@
+.git
+.vscode
+tests/
+docs/
+scripts/
+backend_run.log
+__pycache__/
+*.pyc
+.venv
