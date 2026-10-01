@@ -5,8 +5,8 @@ set "ANDROID_SDK_ROOT=C:\Users\Vaishnavi\AppData\Local\Android\Sdk"
 set "ANDROID_HOME=C:\Users\Vaishnavi\AppData\Local\Android\Sdk"
 set "ADB_EXE=C:\Users\Vaishnavi\AppData\Local\Android\Sdk\platform-tools\adb.exe"
 set "FLUTTER_BAT=C:\Users\Vaishnavi\flutter\bin\flutter.bat"
-set "DEVICE_ID=RZCW709LCYF"
-set "API_KEY=0-MMnmJYNqExEUHDnAIPgtR-GNHqikNK9abHVavoHPY"
+set "DEVICE_ID=<YOUR_DEVICE_ID>"
+set "API_KEY=<YOUR_API_KEY>"
 
 "%ADB_EXE%" devices > "%~dp0qrshieldpp-mobile\adb_devices.log" 2>&1
 "%ADB_EXE%" reverse tcp:8000 tcp:8000 >> "%~dp0qrshieldpp-mobile\adb_devices.log" 2>&1
